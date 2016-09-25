@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Main" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Drive Off</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <!--Do not update the version of foundation -angular-foundation library depends on this one -->
+  <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+
+  <link rel="stylesheet" href="app.css">
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation-essential/6.2.2/js/vendor/jquery.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.js"></script>
+  <script src="http://pineconellc.github.io/angular-foundation/mm-foundation-tpls-0.8.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-sanitize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.5.0/angular-local-storage.js"></script>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/plugins/foundation.offcanvas.js"></script>
+  
+  
+  <!-- font awesome for icons -->
+</head>
+
+<body ng-app="Main">
+        <div ng-controller="NavCtrl as nav">
+                <div class="off-canvas-wrap">
+                    <div class="inner-wrap">
+                        <nav class="tab-bar">
+                            <section class="right-small">
+                                <a class="right-off-canvas-toggle menu-icon" ><span></span></a>
+                            </section>
+
+                            <section class="middle tab-bar-section">
+                                <h1 class="title"><i class="fa fa-car d-icon"></i>  Drive Off</h1>
+                            </section>
+
+
+                        </nav>
+                      <div class="margin30"></div>  
+                      <div class="main-section">
+                        <div class="row">
+                            <ui-view class="small-12 large-10 large-offset-1 columns"></ui-view>
+                        </div>
+                      </div>
+                      
+                        <aside class="right-off-canvas-menu">
+                            <ul class="off-canvas-list">
+                                <li><a href="#/trip">New Trip</a></li>
+                                <li><a href="#/friends">Friends</a></li>
+                                <li><a href="#/rewards">Rewards</a></li>
+                            </ul>
+                        </aside>
+                       
+
+
+                        <a class="exit-off-canvas"></a>
+                    </div>
+                </div>
+            
+        </div><!-- end of NavCtrl -->
+        <footer id="footer" class="">
+            <div class="footer-section">
+
+                <div class="row">
+                    <div class="medium-3 small-6 columns"> Footer</div>
+                </div>
+
+            </div>
+        </footer><!--default footer end here-->
+
+
+
+
+  <!-- agstock's angular js files -->
+   <script type="text/javascript" src="public/main.angular.min.js"></script>
+  
+    
+</body>
+</html>

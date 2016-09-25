@@ -1,0 +1,11 @@
+<h1 class="text-center">  Rewards</h1>
+  
+  <div ng-repeat="reward in myRewards.rewards" class="col-sm-4 margin20">
+      <div class="rewards-wrap">
+          <img ng-src="{{reward.photo}}" class="img-responsive" alt="">
+          <h4>{{reward.business}}</h4>
+          <p>{{reward.points}}</p>
+          <p>{{reward.description}}</p>
+          <i class="fa fa-plus-circle d-icon" ng-click="myRewards.chooseReward(reward.id);"></i>
+      </div><!--team-wrap-->
+  </div><!--team col-->
