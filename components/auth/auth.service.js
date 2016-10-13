@@ -1,15 +1,16 @@
-function Auth($http, localStorageService, $rootScope) {
+function Auth($http, $sessionStorage) {
   
-  var API_URL = 'https://driveoff.herokuapp.com'
+  // var API_URL = 'https://driveoff.herokuapp.com'
+  var API_URL = 'http://localhost:3000'
   return {
     isAuthenticated: function() {
-      return localStorageService.get('auth_token');
+      return $sessionStorage.auth_token;
     },
     
     login: function(credentials) {
       var login = $http.post(API_URL + '/login', credentials);
         login.success(function(result) {
-          localStorageService.set('auth_token', result.token);
+          $sessionStorage.auth_token = result.token;
           var user = { 
             id: result.id, 
             name: result.name,
@@ -17,25 +18,53 @@ function Auth($http, localStorageService, $rootScope) {
             points: result.points,
             email: result.email
           }
-          localStorageService.set('user', JSON.stringify(user)); 
+          $sessionStorage.user = JSON.stringify(user); 
         });
 
         return login;
     },
     
     logout: function(){
-      localStorageService.unset('auth_token');
-      localStorageService.unset('user');
+      delete $sessionStorage.auth_token;
+      delete $sessionStorage.user;
     },
-
+// creates a FormData JS object with appended values from obj
+  //
+  // obj - JSON object
+  //
+  // returns FormData object
+  
     register: function(formData) {
-      localStorageService.unset('auth_token');
-      var register = $http.post(API_URL + '/users', formData);
-      register.success(function(result) {
-        localStorageService.set('auth_token', result.token);
-      });
+      delete $sessionStorage.auth_token;
+      // var req = {
+      //    method: 'POST',
+      //    url: API_URL + '/users',
+      //    headers: {'Content-Type': undefined},
+      //    data: {
+      //     "user": formData
+      //    }
+      // }
 
-      return register;
+      //   function createFormData (obj) {
+      //   var fd = new FormData();
+      //   for (prop in obj) {
+      //       if (obj.hasOwnProperty(prop)) {
+      //           // do something with data[prop]
+      //           fd.append(prop, obj[prop]);
+      //       }
+      //   }
+      //   // fd.append("user", JSON.stringify(obj));
+      //   return fd;
+      // }
+
+      
+      return $http.post(API_URL + '/users', JSON.stringify({"user": formData}), 
+      {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': 'application/json'}
+       }).then(function(result) {
+          $sessionStorage.auth_token = result.token;
+       });
     }
   }
 }

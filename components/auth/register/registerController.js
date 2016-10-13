@@ -3,17 +3,17 @@ Main.controller('RegisterCtrl', ['Auth', '$state', '$scope', function (Auth, $st
     vm.errors = [];
 
     vm.register = function() {
-      if ($scope.registerForm.$valid) {
+      // if ($scope.registerForm.$valid) {
         Auth.register(vm.user).then(function() {
-          $state.go('posts.list');
+          $state.go('profile');
         }, function(err) {
-          vm.errors.push(err);
+          vm.errors.push(err.data);
         });
-      }
+      // }
     };
     
     vm.validatePassword = function() {
-      
+      return vm.password == vm.password_confirmation;
     };
     
 }])

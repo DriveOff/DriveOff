@@ -116,6 +116,14 @@ input[type='file'] {
   line-height: 1;
 }
 
+.css-form input.ng-invalid.ng-touched {
+   background-color: #FA787E;
+ }
+
+ .css-form input.ng-valid.ng-touched {
+   background-color: #78FA89;
+ }
+
 select {
   background-image: url('data:image/svg+xml,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 18 30" enable-background="new 0 0 18 30" xml:space="preserve"><path fill="%23999999" d="M17.8,8.8c0,0.3-0.1,0.6-0.3,0.8c-0.2,0.2-0.5,0.3-0.8,0.3H1.3C1,9.9,0.8,9.7,0.6,9.5 C0.3,9.3,0.2,9.1,0.2,8.8c0-0.3,0.1-0.6,0.3-0.8l7.7-7.7C8.4,0.1,8.7,0,9,0c0.3,0,0.6,0.1,0.8,0.3L17.4,8 C17.7,8.2,17.8,8.5,17.8,8.8z"/><path fill="%23999999" d="M17.4,20.5c0.2,0.2,0.3,0.5,0.3,0.8c0,0.3-0.1,0.6-0.3,0.8l-7.7,7.7C9.6,29.9,9.3,30,9,30 c-0.3,0-0.6-0.1-0.8-0.3L0.6,22c-0.2-0.2-0.3-0.5-0.3-0.8c0-0.3,0.1-0.6,0.3-0.8c0.2-0.2,0.5-0.3,0.8-0.3h15.3 C17,20.1,17.2,20.3,17.4,20.5z"/></svg>');
   background-position: right 4px center;
@@ -281,6 +289,36 @@ ul.off-canvas-list li a {
   background-image: url(assets/steering-wheel_2000x1333.jpg);
 }
 
+@media only screen and (max-width: 240px) {
+  .home .main-section {
+    background-image: url(assets/girl-and-car_240x160.jpg);
+  }
+
+  .login .main-section, .register .main-section {
+    background-image: url(assets/steering-wheel_240x160.jpg);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .home .main-section {
+    background-image: url(assets/girl-and-car_480x320.jpg);
+  }
+
+  .login .main-section, .register .main-section {
+    background-image: url(assets/steering-wheel_480x320.jpg);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .home .main-section {
+    background-image: url(assets/girl-and-car_1024x682.jpg);
+  }
+
+  .login .main-section, .register .main-section {
+    background-image: url(assets/steering-wheel_1024x682.jpg);
+  }
+}
+
 .form-logo {
   display: block;
   max-width: 200px;
@@ -301,6 +339,10 @@ ul.off-canvas-list li a {
 
 /* Trip */
 
+.trip-final li {
+  list-style-type: none;
+}
+
 h2.trip-car, .dark h2.trip-car{
   margin-top: 2rem;
   color: #abebc6;
@@ -319,4 +361,41 @@ h2.trip-status {
   .trip-status {
     margin-bottom: 5rem;
   }
+}
+
+/* Trip Spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 100px auto;
+  background-color: #333;
+
+  border-radius: 100%;  
+  -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+  0% { -webkit-transform: scale(0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes sk-scaleout {
+  0% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 100% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+/* Trip map size */
+#map {
+  height:300px;
+  width:100%;
 }

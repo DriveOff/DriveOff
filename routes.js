@@ -2,8 +2,7 @@ Main.config([
 '$stateProvider',
 '$urlRouterProvider',
 '$httpProvider',
-'localStorageServiceProvider',
-function($stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceProvider) {
+function($stateProvider, $urlRouterProvider, $httpProvider) {
   
   $stateProvider
     .state('home', {
@@ -11,14 +10,12 @@ function($stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceP
       templateUrl: 'components/home/_index.html'
     })
   
-  $stateProvider
     .state('profile', {
       url: '/profile',
       templateUrl: 'components/auth/profile/_index.html',
       controller: 'ProfileCtrl as myProfile'
     })
   
-  $stateProvider
     .state('friends', {
       url: '/friends',
       templateUrl: 'components/friends/_index.html',
@@ -48,10 +45,20 @@ function($stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceP
       controller: 'TripCtrl as myTrip'
     })
 
+    .state('trip.map', {
+      templateUrl: 'components/map/_index.html',
+      controller: 'MapCtrl as myMap'
+    })
+
     .state('login', {
       url: '/login',
       templateUrl: 'components/auth/login/_index.html',
       controller: 'LoginCtrl as loginCtrl'
+    })
+    
+    .state('logout', {
+      url:  '/logout',
+      controller: 'LogoutCtrl as logout',
     })
     
     .state('register', {
@@ -72,10 +79,6 @@ function($stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceP
  // also redirects to login
     $httpProvider.interceptors.push('AuthInterceptor');
     
-  localStorageServiceProvider
-    .setPrefix('Main')
-    .setStorageType('sessionStorage')
-    .setNotify(true, true)
 }]).
   run(function($rootScope, $location) {
     $rootScope.$watch(function() {
@@ -113,4 +116,10 @@ function($stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceP
       pushFooterDown();
       $window.resize(pushFooterDown);
   })
-});;
+});
+
+Main.config([
+  "$httpProvider", function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+  }
+]);

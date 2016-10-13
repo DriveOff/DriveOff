@@ -14,6 +14,12 @@ function tripFactory($http, $q, coordFactory, calculateDistanceFactory, profileF
     status: 'inactive'
   }
   
+  // returns an array of positions
+  
+  trip.positions = function () {
+    return coordFactory.getAllCoordinates();
+  }
+
   var postTripURL = 'https://driveoff.herokuapp.com/trips';
   
   
@@ -21,27 +27,28 @@ function tripFactory($http, $q, coordFactory, calculateDistanceFactory, profileF
     var d = new Date();
     return d.getTime();
   }
-    
+
   //processes the miles and minutes for the trip
   //
   // returns nothing
   var processTrip = function() {
     trip.status = 'finished';
     //get positions from local storage
-    var positions = coordFactory.getAllCoordinates();
     
-        console.log(positions);
+    var positions = trip.positions;
+
+    console.log(trip.positions);
     
     //calculate miles from all locations
     var len = positions.length;
     
 
     for (var i = 1; i < len; i++ ){
-      trip.miles+= calculateDistanceFactory.getDistance(positions[i-1].latitude, positions[i-1].longitude, positions[i].latitude, positions[i].longitude);
+      trip.miles+= Math.round(calculateDistanceFactory.getDistance(positions[i-1].latitude, positions[i-1].longitude, positions[i].latitude, positions[i].longitude) * 100) / 100;
     }
     console.log(trip.miles);
     // calculate minutes from start and end time (60,000 mSeconds in a Minute)
-    trip.minutes = (trip.endTime - trip.startTime)/60000;
+    trip.minutes = Math.round( (trip.endTime - trip.startTime)/60000  * 100 ) / 100;
     console.log(trip.minutes);
     // set user id
     trip.user_id = profileFactory.id;
@@ -69,6 +76,8 @@ function tripFactory($http, $q, coordFactory, calculateDistanceFactory, profileF
   //
   // returns the promise
   trip.endTrip = function() {
+    $('body').removeClass('dark black-background');
+    
     trip.endTime = getCurrentTime();
     trip.checkLocation(function(){});
     processTrip();
@@ -79,6 +88,8 @@ function tripFactory($http, $q, coordFactory, calculateDistanceFactory, profileF
   //
   // returns nothing
   trip.beginTrip = function(){
+    $('body').addClass('dark black-background');
+    
     trip.status = 'driving safely...';
     trip.startTime = getCurrentTime();
     trip.checkLocation();
